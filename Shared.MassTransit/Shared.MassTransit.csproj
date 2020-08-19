@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MassTransit" Version="7.0.3" />
+      <PackageReference Include="MassTransit.Autofac" Version="7.0.3" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="7.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Demo.Contracts\Demo.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

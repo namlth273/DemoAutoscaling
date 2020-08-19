@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    {{- include "worker.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "worker.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "worker.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                # The secret resource we are reading from
+                name: {{ .Release.Name }}
+          env:
+          - name: RabbitMq__Host
+            value: {{ .Values.env.RabbitMq.Host }}
+          - name: RabbitMq__VirtualHost
+            value: {{ .Values.env.RabbitMq.VirtualHost }}
+          - name: RabbitMq__Username
+            valueFrom:
+              secretKeyRef:
+                # The secret resource we are reading from
+                name: {{ .Release.Name }}
+                # This key is read from our helm-secret secrets.yaml
+                key: RabbitMqUsername
+          - name: RabbitMq__Password
+            valueFrom:
+              secretKeyRef:
+                # The secret resource we are reading from
+                name: {{ .Release.Name }}
+                # This key is read from our helm-secret secrets.yaml
+                key: RabbitMqPassword
+          - name: Serilog__WriteTo__1__Args__serverUrl
+            value: {{ .Values.env.Serilog.Url }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP

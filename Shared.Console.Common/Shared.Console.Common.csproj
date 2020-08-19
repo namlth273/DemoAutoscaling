@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.5" />
+      <PackageReference Include="Serilog" Version="2.9.0" />
+      <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Demo.Contracts\Demo.Contracts.csproj" />
+      <ProjectReference Include="..\Shared.Common\Shared.Common.csproj" />
+    </ItemGroup>
+
+</Project>

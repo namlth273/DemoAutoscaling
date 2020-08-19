@@ -1,0 +1,3 @@
+1. This application will be scaled up if any message in queue "{{ .Values.env.RabbitMq.QueueName }}"
+
+2. Maximum replica count = {{ .Values.maxReplicaCount }}
