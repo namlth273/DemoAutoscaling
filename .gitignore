@@ -30,4 +30,4 @@ msbuild.wrn
 .idea
 .idea/*
 *.yaml.dec
-
+.vs
